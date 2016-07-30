@@ -1,0 +1,17 @@
+all commands are done inside the project folder
+1-to open server normally 
+http-server -o  
+// but this will not disable cache so the templates will be cached(saved in computer forever) so when you edit them the server will not show the changes. 
+// 
+
+2-to open server with the cache disabled *(Recommended)*
+http-server -c-1 -o 
+//this will work if you have not apply the previous command before to your project.
+//
+
+3-to open server with the cache disabled and using another port(not the default one)
+*(Recommended for my old project confusion)*
+http-server -p 8000 -c-1 -o 
+//this will work if you applied the 1st command before to your project , we changed the port so the browser deals with the server as new server and will not cashe the templates as we put -c-1
+//
+
