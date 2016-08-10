@@ -132,18 +132,21 @@ angular.module('confusionApp')
         }
         $scope.showDish = false;
         $scope.message = "Loading ...";
-        $scope.dish = menuFactory.get({
-            id: $stateParams.id
-        })
-            .$promise.then(
-                function(response) {
-                    $scope.dish = response;
-                    $scope.showDish = true;
-                },
-                function(response) {
-                    $scope.message = "Error: " + response.status + " " + response.statusText;
-                }
-        );
+        dishQuery = function() {
+            menuFactory.get({
+                id: $stateParams.id
+            })
+                .$promise.then(
+                    function(response) {
+                        $scope.dish = response;
+                        $scope.showDish = true;
+                    },
+                    function(response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+            );
+        };
+        dishQuery();
         $scope.comment = {
             rating: 5,
             comment: ""
@@ -156,12 +159,7 @@ angular.module('confusionApp')
 
             .$promise.then(
                 function(response) {
-                    $scope.comment.createdAt = new Date();
-                    $scope.comment.postedBy = {
-                        firstname: $scope.fullName.firstname,
-                        lastname: $scope.fullName.lastname
-                    };
-                    $scope.dish.comments.push($scope.comment);
+                    dishQuery();
                     $scope.commentForm.$setPristine();
                     $scope.comment = {
                         rating: 5,
